@@ -30,7 +30,6 @@ SECRET_KEY = 'django-insecure-n_iypzl+&a9d)^tu&a42gu)fa-&womdcyp8@)c+-pwq924wbnc
 DEBUG = True
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
-
 # Kafka
 KAFKA_BOOTSTRAP_SERVERS = 'kafka-service:9092'
 
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'message.middleware.TrailingSlashMiddleware'
 ]
 
 ROOT_URLCONF = 'messaging_app.urls'

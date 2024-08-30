@@ -19,8 +19,8 @@ class MessageType(TextChoices):
 
 class Messages(BaseModel):
     user = ForeignKey(Users, on_delete=CASCADE)
-    group = ForeignKey(Groups, on_delete=CASCADE)
-    chat = ForeignKey(Chats, on_delete=CASCADE)
+    group = ForeignKey(Groups, on_delete=CASCADE, null=True, blank=True)
+    chat = ForeignKey(Chats, on_delete=CASCADE, null=True, blank=True)
     message_type = CharField(max_length=100, choices=MessageType.choices)
     content = TextField()
     sent_at = DateTimeField(auto_now_add=True)

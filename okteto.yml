@@ -1,0 +1,8 @@
+name: messaging-app-django
+namespace: default
+context: minikube
+image: hammadooz/messaging-app:1.0.8
+sync:
+  - .:/opt
+forward:
+  - 8000:8000
