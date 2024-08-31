@@ -1,8 +1,10 @@
 from core.models import BaseModel
-from django.db.models import CharField
+from django.db.models import ManyToManyField
+from user.models import Users
+
 
 class Chats(BaseModel):
-    name = CharField(max_length=200)
+    members = ManyToManyField(Users)
 
     class Meta:
         db_table = "chats"

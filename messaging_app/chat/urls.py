@@ -1,10 +1,10 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import ChatViewSet
+from django.urls import path
 
-router = DefaultRouter()
-router.register(r'chats', ChatViewSet, basename='chat')
+from .views import CreateChatAPIView, DeleteChatAPIView
 
 urlpatterns = [
-    path('', include(router.urls))
+    path("chats/create/", CreateChatAPIView.as_view(), name="create_chat"),
+    path(
+        "chats/delete/<int:chat_id>/", DeleteChatAPIView.as_view(), name="delete_chat"
+    ),
 ]
