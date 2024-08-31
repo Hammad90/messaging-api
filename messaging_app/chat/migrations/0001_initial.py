@@ -8,20 +8,28 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('user', '__first__'),
+        ("user", "__first__"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Chats',
+            name="Chats",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('members', models.ManyToManyField(to='user.users')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("members", models.ManyToManyField(to="user.users")),
             ],
             options={
-                'db_table': 'chats',
+                "db_table": "chats",
             },
         ),
     ]

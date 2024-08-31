@@ -9,29 +9,69 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('chat', '0001_initial'),
-        ('group', '0001_initial'),
-        ('user', '__first__'),
+        ("chat", "0001_initial"),
+        ("group", "0001_initial"),
+        ("user", "__first__"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Messages',
+            name="Messages",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('message_type', models.CharField(choices=[('text', 'Text'), ('image', 'Image'), ('video', 'Video'), ('file', 'File')], max_length=100)),
-                ('content', models.TextField()),
-                ('sent_at', models.DateTimeField(auto_now_add=True)),
-                ('delivered_at', models.DateTimeField(blank=True, null=True)),
-                ('seen_at', models.DateTimeField(blank=True, null=True)),
-                ('chat', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='chat.chats')),
-                ('group', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='group.groups')),
-                ('sent_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.users')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "message_type",
+                    models.CharField(
+                        choices=[
+                            ("text", "Text"),
+                            ("image", "Image"),
+                            ("video", "Video"),
+                            ("file", "File"),
+                        ],
+                        max_length=100,
+                    ),
+                ),
+                ("content", models.TextField()),
+                ("sent_at", models.DateTimeField(auto_now_add=True)),
+                ("delivered_at", models.DateTimeField(blank=True, null=True)),
+                ("seen_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "chat",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="chat.chats",
+                    ),
+                ),
+                (
+                    "group",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="group.groups",
+                    ),
+                ),
+                (
+                    "sent_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="user.users"
+                    ),
+                ),
             ],
             options={
-                'db_table': 'messages',
+                "db_table": "messages",
             },
         ),
     ]

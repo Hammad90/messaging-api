@@ -1,23 +1,25 @@
 from core.models import BaseModel
-from user.models import Users
 from django.db.models import (
-    CharField,
-    TextField,
-    ForeignKey,
     CASCADE,
-    TextChoices,
+    CharField,
     DateTimeField,
+    ForeignKey,
+    TextChoices,
+    TextField,
 )
+from user.models import Users
+
 
 class MemberRole(TextChoices):
-    MEMBER = 'member', 'Member'
-    ADMIN = 'admin', 'Admin'
+    MEMBER = "member", "Member"
+    ADMIN = "admin", "Admin"
+
 
 class Groups(BaseModel):
     name = CharField(max_length=250)
     created_by = ForeignKey(Users, on_delete=CASCADE)
     description = TextField()
-    
+
     class Meta:
         db_table = "groups"
 

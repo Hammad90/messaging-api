@@ -1,21 +1,23 @@
-from core.models import BaseModel
-from user.models import Users
-from group.models import Groups
 from chat.models import Chats
+from core.models import BaseModel
 from django.db.models import (
-    CharField,
-    ForeignKey,
     CASCADE,
+    CharField,
+    DateTimeField,
+    ForeignKey,
     TextChoices,
     TextField,
-    DateTimeField
 )
+from group.models import Groups
+from user.models import Users
+
 
 class MessageType(TextChoices):
-    TEXT = 'text', 'Text'
-    IMAGE = 'image', 'Image'
-    VIDEO = 'video', 'Video'
-    FILE = 'file', 'File'
+    TEXT = "text", "Text"
+    IMAGE = "image", "Image"
+    VIDEO = "video", "Video"
+    FILE = "file", "File"
+
 
 class Messages(BaseModel):
     sent_by = ForeignKey(Users, on_delete=CASCADE)

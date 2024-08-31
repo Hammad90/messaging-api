@@ -9,37 +9,74 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('user', '__first__'),
+        ("user", "__first__"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Groups',
+            name="Groups",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=250)),
-                ('description', models.TextField()),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.users')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=250)),
+                ("description", models.TextField()),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="user.users"
+                    ),
+                ),
             ],
             options={
-                'db_table': 'groups',
+                "db_table": "groups",
             },
         ),
         migrations.CreateModel(
-            name='GroupMembers',
+            name="GroupMembers",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('role', models.CharField(choices=[('member', 'Member'), ('admin', 'Admin')], max_length=200)),
-                ('joined_at', models.DateTimeField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.users')),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='group.groups')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "role",
+                    models.CharField(
+                        choices=[("member", "Member"), ("admin", "Admin")],
+                        max_length=200,
+                    ),
+                ),
+                ("joined_at", models.DateTimeField(auto_now=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="user.users"
+                    ),
+                ),
+                (
+                    "group",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="group.groups"
+                    ),
+                ),
             ],
             options={
-                'db_table': 'group_members',
+                "db_table": "group_members",
             },
         ),
     ]
