@@ -1,10 +1,7 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import MessageViewSet
-
-router = DefaultRouter()
-router.register(r'messages', MessageViewSet, basename='message')
+from .views import SendMessageAPIView, GetMessagesAPIView
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('messages/send/', SendMessageAPIView.as_view(), name='send_message'),
+    path('messages/get/', GetMessagesAPIView.as_view(), name='get_messages')
 ]

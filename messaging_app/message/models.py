@@ -18,7 +18,7 @@ class MessageType(TextChoices):
     FILE = 'file', 'File'
 
 class Messages(BaseModel):
-    user = ForeignKey(Users, on_delete=CASCADE)
+    sent_by = ForeignKey(Users, on_delete=CASCADE)
     group = ForeignKey(Groups, on_delete=CASCADE, null=True, blank=True)
     chat = ForeignKey(Chats, on_delete=CASCADE, null=True, blank=True)
     message_type = CharField(max_length=100, choices=MessageType.choices)
