@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from chat.models import Chats
 from group.models import Groups
 from rest_framework.request import Request
@@ -66,6 +68,11 @@ class GetMessagesAPIView(APIView):
             return Response({"error": "User does not exist"}, status=HTTP_404_NOT_FOUND)
         user_chats = Chats.objects.filter(members=user)
         chat_messages = Messages.objects.filter(chat__in=user_chats)
+
+        chat_messages_to_update = chat_messages.filter(
+            delivered_at__isnull=True
+        ).exclude(sent_by__exact=user_id)
+        chat_messages_to_update.update(delivered_at=datetime.now())
 
         user_groups = Groups.objects.filter(groupmembers__user=user)
         group_messages = Messages.objects.filter(group__in=user_groups)
