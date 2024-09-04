@@ -2,6 +2,7 @@ from datetime import datetime
 
 from chat.models import Chats
 from group.models import Groups
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
@@ -13,6 +14,8 @@ from .serializers import MessageSerializer
 
 
 class SendMessageAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request: Request):
         user_id = request.data.get("user_id")
         group_id = request.data.get("group_id")
@@ -55,6 +58,8 @@ class SendMessageAPIView(APIView):
 
 
 class GetMessagesAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request: Request):
         user_id = request.data.get("user_id")
 

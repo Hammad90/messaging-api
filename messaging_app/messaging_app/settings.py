@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_simplejwt",
     "core",
     "user",
     "chat",
@@ -95,6 +96,8 @@ DATABASES = {
         "PORT": POSTGRES_PORT,
     }
 }
+
+AUTH_USER_MODEL = "user.Users"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
