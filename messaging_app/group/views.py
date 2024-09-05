@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import (
@@ -8,6 +9,7 @@ from rest_framework.status import (
 )
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from user.models import Users
 
 from .models import GroupMembers, Groups, MemberRole
@@ -15,6 +17,9 @@ from .serializers import GroupSerializer
 
 
 class GroupViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
     queryset = Groups.objects.all()
     serializer_class = GroupSerializer
 
@@ -45,6 +50,9 @@ class GroupViewSet(ModelViewSet):
 
 
 class JoinGroupAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
     def post(self, request: Request):
         user_id = request.data.get("user_id")
         group_id = request.data.get("group_id")
@@ -82,6 +90,9 @@ class JoinGroupAPIView(APIView):
 
 
 class LeaveGroupAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
     def post(self, request: Request):
         user_id = request.data.get("user_id")
         group_id = request.data.get("group_id")

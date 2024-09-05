@@ -7,6 +7,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from user.models import Users
 
 from .models import Messages
@@ -15,6 +16,7 @@ from .serializers import MessageSerializer
 
 class SendMessageAPIView(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     def post(self, request: Request):
         user_id = request.data.get("user_id")
@@ -59,6 +61,7 @@ class SendMessageAPIView(APIView):
 
 class GetMessagesAPIView(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request: Request):
         user_id = request.data.get("user_id")
