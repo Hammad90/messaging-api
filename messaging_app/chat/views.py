@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import (
@@ -7,6 +8,7 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
 )
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from user.models import Users
 
 from .models import Chats
@@ -14,6 +16,9 @@ from .serializers import ChatSerializer
 
 
 class CreateChatAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
     def post(self, request: Request):
         member_ids = request.data.get("member_ids")
 
@@ -42,6 +47,9 @@ class CreateChatAPIView(APIView):
 
 
 class DeleteChatAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
     def delete(self, request: Request, chat_id: int):
         try:
             chat = Chats.objects.get(id=chat_id)
