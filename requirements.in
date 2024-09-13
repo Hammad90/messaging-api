@@ -3,3 +3,4 @@ django
 confluent-kafka
 djangorestframework
 djangorestframework-simplejwt
+openai

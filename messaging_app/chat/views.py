@@ -1,7 +1,11 @@
+from os import getenv
+
+from openai import OpenAI
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import (
+    HTTP_200_OK,
     HTTP_201_CREATED,
     HTTP_204_NO_CONTENT,
     HTTP_400_BAD_REQUEST,
@@ -59,3 +63,17 @@ class DeleteChatAPIView(APIView):
             )
         except Chats.DoesNotExist:
             return Response({"error": "Chat does not exist"}, status=HTTP_404_NOT_FOUND)
+
+
+class GptChatAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request: Request):
+        openai_client = OpenAI(api_key=getenv("OPENAI_API_KEY"))
+        prompt = request.data.get("prompt")
+        response = openai_client.chat.completions.create(
+            model="gpt-3", messages=[{"role": "user", "content": prompt}]
+        )
+        answer = response["choices"][0]["message"]["content"]
+        return Response({"answer": answer}, status=HTTP_200_OK)
