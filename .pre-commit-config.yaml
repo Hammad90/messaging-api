@@ -39,3 +39,4 @@ repos:
     rev: 1.7.9  # Use the latest stable version
     hooks:
       - id: bandit
+        exclude: '/tests.py$'
