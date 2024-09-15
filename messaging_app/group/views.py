@@ -1,3 +1,4 @@
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from user.models import Users
+from user.serializers import UserSerializer
 
 from .models import GroupMembers, Groups, MemberRole
 from .serializers import GroupSerializer
@@ -47,6 +49,13 @@ class GroupViewSet(ModelViewSet):
         )
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
+
+    @action(detail=True, methods=["get"])
+    def members(self, request: Request, pk=None):
+        group = self.get_object()
+        members = group.members.all()
+        serializer = UserSerializer(members, many=True)
+        return Response(serializer.data, status=HTTP_200_OK)
 
 
 class JoinGroupAPIView(APIView):

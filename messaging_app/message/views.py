@@ -64,7 +64,7 @@ class GetMessagesAPIView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def get(self, request: Request):
-        user_id = request.data.get("user_id")
+        user_id = request.query_params.get("user_id")
 
         if not user_id:
             return Response(

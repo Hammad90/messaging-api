@@ -18,7 +18,7 @@ class MemberRole(TextChoices):
 class Groups(BaseModel):
     name = CharField(max_length=250)
     created_by = ForeignKey(Users, on_delete=CASCADE, related_name="created_by")
-    description = TextField()
+    description = TextField(blank=True)
 
     class Meta:
         db_table = "groups"
